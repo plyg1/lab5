@@ -1,0 +1,140 @@
+#include <iostream>
+#include <cmath>
+#include <Windows.h>
+
+using namespace std;
+
+// Завдання 1 
+int task1() {
+
+    int n;
+    double x, y;
+    int count1 = 0, count2 = 0;
+
+    double x1 = 1, y1 = 2, r1 = 3;
+    double x2 = 2, y2 = 3, w = 2, h = 3;
+
+    cout << "Введіть кількість точок: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+
+        cout << "Введіть координати " << i + 1 << " точки: ";
+        cin >> x >> y;
+
+        if ((x - x1) * (x - x1) + (y - y1) * (y - y1) <= r1 * r1) {
+            count1++;
+        }
+
+        if (x >= x2 && x <= x2 + w && y >= y2 && y <= y2 + h) {
+            count2++;
+        }
+    }
+
+    cout << "У першій фігурі: " << count1 << endl;
+    cout << "У другій фігурі: " << count2 << endl;
+
+    return 0;
+
+}
+
+// Завдання 2
+void task2() {
+    double x;
+    int n;
+
+    cout << "Введіть x та n: ";
+    cin >> x >> n;
+
+    double sum = 0;
+    for (int i = 1; i <= n; i++) {
+        double el = pow(x, i - 1);
+        sum += el;
+
+        if (i % 4 == 0) {
+            cout << el << endl;
+        }
+    }
+
+    cout << "Сума: " << sum << endl;
+}
+
+void task3() {
+
+    double x, u, sum;
+
+    cout << "Введіть x (x > 1): ";
+    cin >> x;
+
+    double eps = 0.00001;
+
+    u = 1 / x;
+    sum = u;
+
+    int p = 1;
+
+    while (fabs(u) >= eps) {
+
+        u = 1 / pow(x, p);
+
+        sum += u;
+
+        p += 2;
+
+    }
+
+    cout << "Останній член: " << u << endl;
+    cout << "Сума: " << sum << endl;
+
+}
+
+void menu() {
+
+    setlocale(LC_ALL, "ukrainian");
+
+    int task;
+
+    do {
+
+        cout << "Виберіть завдання (або 0 для виходу): " << endl;
+        cout << "1 - Завдання 1" << endl;
+        cout << "2 - Завдання 2" << endl;
+        cout << "3 - Завдання 3" << endl;
+
+        cin >> task;
+
+        switch (task) {
+        case 1:
+            task1();
+            break;
+
+        case 2:
+            task2();
+            break;
+
+        case 3:
+            task3();
+            break;
+
+        case 0:
+            cout << "Вихід з програми" << endl;
+            break;
+
+        default:
+            cout << "Помилка! Виберіть 1, 2, 3 або 0" << endl;
+        }
+
+    } while (task != 0);
+
+}
+
+int main() {
+
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    menu();
+
+    return 0;
+
+}
